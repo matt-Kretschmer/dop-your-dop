@@ -18,6 +18,13 @@ import {
 
 import * as dotenv from 'dotenv';
 
+const parseResponse = (response: PromiseResult<QueryResponse, AWSError>) => {
+
+  //TODO: parse data from response
+
+  return response;
+};
+
 export class DBController {
 
   readonly dbName: string;
@@ -53,19 +60,22 @@ export class DBController {
 
     try {
 
+      const params = {
+        QueryString: query,
+      };
+
       const response = await this.queryClient
-        .query({
-          'QueryString': query,
-        })
+        .query(params)
         .promise();
 
-      return response;
+      return parseResponse(response);
 
     } catch (error) {
       throw new Error(`Error querying database: ${error}`);
     }
   };
 
+  //TODO: use more specific type for records
   async executeWrite(records: object[]): Promise<PromiseResult<WriteRecordsResponse, AWSError>> {
 
     try {
@@ -80,7 +90,7 @@ export class DBController {
         .writeRecords(params)
         .promise();
 
-      return response;
+      return response;//TODO: examine response to check for success?
 
     } catch (error) {
       throw new Error(`Error writing to database: ${error}`);
