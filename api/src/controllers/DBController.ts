@@ -18,11 +18,46 @@ import {
 
 import * as dotenv from 'dotenv';
 
-const parseResponse = (response: PromiseResult<QueryResponse, AWSError>) => {
+ //TODO: use better return type
+const parseResponse = (response: PromiseResult<QueryResponse, AWSError>): object[] => {
 
-  //TODO: parse data from response
+  const Indices = {
+    usernameIndex: -1,
+    drinkIndex: -1,
+    quantityIndex: -1,
+    timeIndex: -1,
+  };
 
-  return response;
+  //TODO: remove once data consistent (use predefined indices)
+  for (const columnIndex in response.ColumnInfo) {
+    switch (response.ColumnInfo[columnIndex].Name) {
+      case 'username':
+        Indices.usernameIndex = parseInt(columnIndex);
+        break;
+      case 'drink':
+        Indices.drinkIndex = parseInt(columnIndex);
+        break;
+      case 'measure_value::double':
+        Indices.quantityIndex = parseInt(columnIndex);
+        break;
+      case 'time':
+        Indices.timeIndex = parseInt(columnIndex);
+        break;
+    }
+  }
+
+  const data = [];
+
+  for (const record of response.Rows) {
+    data.push({
+      username: record.Data[Indices.usernameIndex].ScalarValue,
+      drink: record.Data[Indices.drinkIndex].ScalarValue,
+      quantity: record.Data[Indices.quantityIndex].ScalarValue,
+      time: record.Data[Indices.timeIndex].ScalarValue,
+    });
+  }
+
+  return data;
 };
 
 export class DBController {
@@ -56,7 +91,7 @@ export class DBController {
     this.queryClient = new TimestreamQuery(aws_config);
   };
 
-  async executeQuery(query: string): Promise<PromiseResult<QueryResponse, AWSError>> {
+  async executeQuery(query: string): Promise<object[]> {
 
     try {
 
