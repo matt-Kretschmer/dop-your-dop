@@ -21,18 +21,16 @@ app.get('/getDrinks', async (req: Request, res: Response) => {
 
 app.get('/postDrink', async (req: Request, res: Response) => {
 
-    const dummyData = [{
-        'Dimensions': [
-          {'Name': 'drink', 'Value': 'beer'},
-          {'Name': 'username', 'Value': 'test_user'},
-        ],
-        'MeasureName': 'quantitity',
-        'MeasureValue': '1',
-        'MeasureValueType': 'DOUBLE',
-        'Time': Date.now().toString()
-      }];
+    const username = 'test_user';
+    const drink = 'beer';
+    const quantity = 1.5;
 
-    const response = await databaseController.executeWrite(dummyData);
+    const response = await databaseController.executeWrite(
+        username,
+        drink,
+        quantity
+    );
+
     res.send(response);
 });
 

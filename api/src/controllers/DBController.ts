@@ -75,15 +75,23 @@ export class DBController {
     }
   };
 
-  //TODO: use more specific type for records
-  async executeWrite(records: object[]): Promise<PromiseResult<WriteRecordsResponse, AWSError>> {
+  async executeWrite(username: string, drink: string, quantity: number): Promise<PromiseResult<WriteRecordsResponse, AWSError>> {
 
     try {
 
       const params = {
         DatabaseName: this.dbName,
         TableName: this.tableName,
-        Records: records
+        Records: [{
+          'Dimensions': [
+            {'Name': 'drink', 'Value': drink},
+            {'Name': 'username', 'Value': username},
+          ],
+          'MeasureName': 'quantity',
+          'MeasureValue': `${quantity}`,
+          'MeasureValueType': 'DOUBLE',
+          'Time': Date.now().toString()
+        }]
       };
 
       const response = await this.writeClient
