@@ -3,7 +3,7 @@ import userRouter from './src/controllers/user'
 
 const app: Application = express()
 
-const port: number = 3001
+const port: number = 8080
 
 app.use('/user', userRouter);
 
