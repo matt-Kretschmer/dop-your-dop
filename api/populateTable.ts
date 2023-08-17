@@ -3,10 +3,9 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-async function writeRecords() {
+const writeRecords = async () => {
   console.log("Writing records");
-  const currentTime = Date.now().toString(); // Unix time in milliseconds
-
+  const currentTime = Date.now().toString();
 
   const writeClient = new AWS.TimestreamWrite({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -43,5 +42,6 @@ async function writeRecords() {
       }
     }
   );
-}
+};
+
 writeRecords();
