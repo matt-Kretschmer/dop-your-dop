@@ -1,4 +1,8 @@
+
 {
+  "name": "dop-your-dop-api",
+  "version": "1.0.0",
+  "description": "NRDB",
   "scripts": {
     "start": "nodemon ./app.ts"
   },
