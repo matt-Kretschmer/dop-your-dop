@@ -12,6 +12,6 @@ export class ApiService {
   ) { }
 
   public get(url: string, apiVersion: string, data?: unknown): Promise<ExampleDateModel | undefined> {
-    return this.http.get<ExampleDateModel >(`https://localhost:7217/WeatherForecast`).toPromise();
+    return this.http.get<ExampleDateModel >(`http://localhost:3001/user`).toPromise();
   }
 }
