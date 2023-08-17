@@ -1,2 +1,11 @@
-<p>login works!</p>
-<button (click)="login()">Login</button>
+<section>
+    <img src="../../assets/DopYourDopLogo.png" alt="Dop Your Dop Logo">
+</section>
+<section>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <input type="text" placeholder="Login" formControlName="username">
+        <input type="text" placeholder="Password" formControlName="password">
+        <button class="btn btn-primary">Login</button>
+        <a routerLink="../register" >Register</a>
+    </form>
+</section>
