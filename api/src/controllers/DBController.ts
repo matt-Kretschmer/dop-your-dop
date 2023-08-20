@@ -9,6 +9,7 @@ import {
 } from 'aws-sdk/clients/timestreamquery';
 
 import {
+  Records,
   WriteRecordsResponse,
 } from 'aws-sdk/clients/timestreamwrite';
 
@@ -110,7 +111,7 @@ export class DBController {
     }
   };
 
-  async executeWrite(username: string, drink: string, quantity: number): Promise<PromiseResult<WriteRecordsResponse, AWSError>> {
+  async executeWrite(username: string, drink: string, quantity: number, time: string = Date.now().toString()): Promise<PromiseResult<WriteRecordsResponse, AWSError>> {
 
     try {
 
@@ -125,8 +126,29 @@ export class DBController {
           'MeasureName': 'quantity',
           'MeasureValue': `${quantity}`,
           'MeasureValueType': 'DOUBLE',
-          'Time': Date.now().toString()
+          'Time': time
         }]
+      };
+
+      const response = await this.writeClient
+        .writeRecords(params)
+        .promise();
+
+      return response;//TODO: examine response to check for success?
+
+    } catch (error) {
+      throw new Error(`Error writing to database: ${error}`);
+    }
+  };
+
+  async executeBatchWrite(data: Records): Promise<PromiseResult<WriteRecordsResponse, AWSError>> {
+
+    try {
+
+      const params = {
+        DatabaseName: this.dbName,
+        TableName: this.tableName,
+        Records: data
       };
 
       const response = await this.writeClient

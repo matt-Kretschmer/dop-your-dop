@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv';
 import userRouter from './src/controllers/user'
 import { DBController } from './src/controllers/DBController'
 import cors from 'cors'
+import { generateData } from './src/dummy_data/batchDataGeneration';
 
 dotenv.config();
 
@@ -32,6 +33,7 @@ app.post('/postDrink', async (req: Request, res: Response) => {
         username: req?.body?.username,
         drink: req?.body?.drink,
         quantity: parseFloat(req?.body?.quantity),
+        time: req?.body?.time
     };
 
     if (!data?.username || !data.drink || !req?.body?.quantity || isNaN(data?.quantity)) {
@@ -44,6 +46,14 @@ app.post('/postDrink', async (req: Request, res: Response) => {
         data.drink,
         data.quantity
     );
+
+    res.send(response);
+});
+
+app.get('/postDummyData', async (req: Request, res: Response) => {
+    const data = await generateData();
+
+    const response = await databaseController.executeBatchWrite(data);
 
     res.send(response);
 });
