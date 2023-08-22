@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HeaderConfigModel } from '../models/shared.models';
 
 @Component({
   selector: 'app-home',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
+  headerConfig:HeaderConfigModel = {headerText: "Feeling Thirsty ?", buttonContent: "Have Another !"}
 }
