@@ -1,0 +1,34 @@
+<div>
+    <ng-container *ngIf="showPopup; else page">
+
+    <div id="popUp">
+        <h2>You have not had anything to drink!</h2>
+        <button (click)="ClosePopUp()">Close</button>
+    </div>
+</ng-container>
+<ng-template #page>
+    <div>
+       
+        <div>
+        <body style="background-color:black;"></body>
+        <h1>Bottoms Up</h1>
+        <button mat-button>Drink</button>
+
+        <div class="container">
+            <div class="logo">
+              <h2>You have to catch up before you can see what your friends are drinking</h2>
+            </div>
+            <button class="button">Drink</button>
+            <div class="beer-icon">
+              🍺
+            </div>
+          </div>
+    </div>
+
+
+    
+    </div>
+</ng-template>
+
+    
+</div>

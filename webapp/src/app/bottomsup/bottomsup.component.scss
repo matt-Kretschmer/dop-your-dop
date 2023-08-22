@@ -1,0 +1,48 @@
+#popUp {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    min-width: 250px;
+    background-color: rgb(21, 21, 21);
+    border: 2px linegold rgb(186, 162, 7);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 11px 15px -7px, rgba(0, 0, 0, 0.14) 0px 24px 38px 3px, rgba(0, 0, 0, 0.12) 0px 9px 46px 8px;
+    padding: 32px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000000;
+  }
+  
+  .logo {
+    text-align: center;
+    margin-bottom: 100px;
+  }
+  
+  .button {
+    background-color: black;
+    border: gold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    color: gold;
+    cursor: pointer;
+  }
+  
+  .beer-icon {
+    display: block;
+    text-align: center;
+    color: gold;
+    font-size: 50px;
+    margin-top: 20px;
+  }
+
+.Hidden {
+    display: none;
+}
