@@ -1,7 +1,0 @@
-<mat-tab-group #myStepper [backgroundColor]="'primary'" [color]="'accent'" [preserveContent]="true" mat-stretch-tabs="false">
-    <mat-tab *ngFor="let config of stepperConfig; let i = index" [label]="config.name">
-        <app-dynamic-loader [displayComponent]="config.component"></app-dynamic-loader>
-    </mat-tab>
-</mat-tab-group>
-<!-- <ng-template appDynamicLoader></ng-template>
-<app-dynamic-loader [displayComponent]="stepperConfig[0].component"></app-dynamic-loader> -->
