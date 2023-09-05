@@ -1,5 +1,5 @@
-<app-header [headerConfig]="headerConfig"></app-header>
+<app-header [headerConfig]="headerConfig[headerIndex]"></app-header>
 <!-- ^^ must emit(_button clicked) -->
 <section class="main-container">
-  <app-tab-generator style="height: 500px;" [stepperConfig]="tabConfig" ></app-tab-generator>
+  <app-tab-generator style="height: 500px;" [stepperConfig]="tabConfig" (tabChanged)="doIt($event)"></app-tab-generator>
 </section>

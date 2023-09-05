@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { HeaderConfigModel } from '../models/shared.models';
 import { ProfileComponent } from './profile/profile.component';
 import { AlcoholicsComponent } from './alcoholics/alcoholics.component';
+import { Chart } from 'angular-highcharts';
 
 @Component({
   selector: 'app-home',
@@ -11,12 +12,90 @@ import { AlcoholicsComponent } from './alcoholics/alcoholics.component';
 })
 export class HomeComponent implements OnInit {
 
-  headerConfig!:HeaderConfigModel;
+  headerConfig!:HeaderConfigModel[];
   action!: Function;
-  
+
   tabConfig!: any[];
+  chart!:Chart;
+  headerIndex:number = 0;
 
   ngOnInit(): void {
+    this.chart = new Chart({
+      chart: {
+        type: 'line',
+        backgroundColor: '#212121'
+      },
+      title: {
+        text: 'Chart Demo',
+        style: {
+          color: '#faefb3', // Change the title text color
+        },
+      },
+      xAxis: {
+        categories: [
+          '12am', '1am', '2am', '3am', '4am', '5am', '6am',
+          '7am', '8am', '9am', '10am', '11am', '12pm', '1pm',
+          '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm',
+          '9pm', '10pm', '11pm'
+        ],
+        title: {
+          text: 'Time',
+          style: {
+            color: '#faefb3', // Change the x-axis title color
+          },
+        },
+        labels: {
+          style: {
+            color: '#faefb3', // Change the x-axis labels color
+          },
+        },
+      },
+      
+      yAxis: {
+        min: 0,
+        title: {
+          text: 'Drank Drank',
+          style: {
+            color: '#faefb3', // Change the y-axis title color
+          },
+        },
+        labels: {
+          style: {
+            color: '#faefb3', // Change the y-axis labels color
+          },
+        },
+      },
+      legend: {
+        reversed: true,
+        itemStyle: {
+          color: '#faefb3', // Change the legend item text color
+        },
+      },
+      plotOptions: {
+        series: {
+          stacking: 'normal',
+          color: '#faefb3', // Change the line color
+          marker: {
+            fillColor: '#faefb3', // Change the marker fill color
+            lineColor: '#faefb3', // Change the marker line color
+          },
+        },
+      },
+      series: [{
+        name: 'Data Series',
+        type:'line',
+        data: this.generateRandomData(),
+        color: '#faefb3', // Change the series line color
+        marker: {
+          fillColor: '#faefb3', // Change the series marker fill color
+          lineColor: '#faefb3', // Change the series marker line color
+        },// Call a function to generate random data
+      }],
+    });
+    this.headerConfig = [
+      {headerText: "Feeling Thirsty ?", buttonContent: "Have Another !", action:() => {}},
+      {headerText: "Drinking History", buttonContent: "Generate Timeline", action:() => {}},
+    ]
     this.tabConfig = [
       {
         name: 'Alcoholics',
@@ -25,10 +104,7 @@ export class HomeComponent implements OnInit {
           id: 'basic',
           context:{
             input: {
-              data: 'ying yang we made it'
-            },
-            output: {
-              headerConfigEmitter: (data:any) => this.something(data) 
+              chart: this.chart
             }
           }
         },
@@ -41,9 +117,6 @@ export class HomeComponent implements OnInit {
           context:{
             input: {
               data: 'easy sui'
-            },
-            output: {
-              headerConfigEmitter: (data:any) => this.something(data) 
             }
           }
         },
@@ -51,20 +124,15 @@ export class HomeComponent implements OnInit {
     ];
   }
 
-  assignHeader(header:HeaderConfigModel){
-    this.headerConfig = header;
+  generateRandomData() {
+    const data = [];
+    for (let i = 0; i < 24; i++) {
+      data.push(Math.floor(Math.random() * 100)); // Random data values (adjust range as needed)
+    }
+    return data;
   }
 
-
-  something(input:HeaderConfigModel){
-    // this.headerConfig = input
-    console.log(input)
-    // input.action()
-    
-  }
-
-  actionHandler(action: Function){
-    this.action = action;
-    console.log("assigned")
+  doIt(index:number){
+    this.headerIndex = index
   }
 }
