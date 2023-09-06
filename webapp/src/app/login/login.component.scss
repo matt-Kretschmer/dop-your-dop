@@ -1,0 +1,75 @@
+a{
+    color: #FAEFB3;
+}
+
+body .LForm{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    padding: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: 10%;
+}
+
+body .LForm .TopLogo{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    padding: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+body .LForm .Details{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    padding: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: 10%;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    }
+
+#Logo{
+width: 100%;
+top: 30%;
+object-fit: fill;
+padding: 0;
+margin: 0;
+}
+
+.LForm{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    border: 2px;
+    border-color: #FAEFB3;
+    border-style: solid;
+}
+
+input{
+    background-color: black;
+    color: #FAEFB3;
+    border-color: #FAEFB3;
+    border: 1px;
+    border-style: solid;
+}
+
+button{
+    width: 150px;
+    height: 50px;
+    color: #FAEFB3;
+    background-color: black;
+    border: 1px;
+    border-style: solid;
+    border-color: #FAEFB3;
+}
