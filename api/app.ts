@@ -23,7 +23,36 @@ app.get('/', (req: Request, res: Response) => {
 })
 
 app.get('/getDrinks', async (req: Request, res: Response) => {
-    const response = await databaseController.executeQuery(`SELECT * FROM ${process.env.DATABASE_NAME}.${process.env.TABLE_NAME}`);
+    const query = `SELECT * FROM ${process.env.DATABASE_NAME}.${process.env.TABLE_NAME}`;
+    const response = await databaseController.executeQuery(query);
+    res.send(response);
+});
+
+//TODO: add validation
+app.get('/getUsersDrinks', async (req: Request, res: Response) => {
+    const username = req?.body?.username;
+
+    const query = `SELECT * FROM ${process.env.DATABASE_NAME}.${process.env.TABLE_NAME} WHERE username = '${username}'`;
+    const response = await databaseController.executeQuery(query);
+    res.send(response);
+});
+
+//TODO: add validation
+app.get('/getTimedDrinks', async (req: Request, res: Response) => {
+    const time = req?.body?.time;//7d, 24h, 15m, etc
+
+    const query = `SELECT * FROM ${process.env.DATABASE_NAME}.${process.env.TABLE_NAME} WHERE time between ago(${time}) and now()`;
+    const response = await databaseController.executeQuery(query);
+    res.send(response);
+});
+
+//TODO: add validation
+app.get('/getUsersTimedDrinks', async (req: Request, res: Response) => {
+    const username = req?.body?.username;
+    const time = req?.body?.time;//7d, 24h, 15m, etc
+
+    const query = `SELECT * FROM ${process.env.DATABASE_NAME}.${process.env.TABLE_NAME} WHERE username = '${username}' AND time between ago(${time}) and now()`;
+    const response = await databaseController.executeQuery(query);
     res.send(response);
 });
 
