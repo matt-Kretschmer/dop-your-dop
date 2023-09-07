@@ -1,31 +1,33 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
-import { ServiceModule } from 'src/services/service.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
 import { HomeModule } from './home/home.module';
 import { SharedModule } from './shared/shared.module';
-import {MatButtonModule} from '@angular/material/button';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { DynamicLoaderDirective } from './directive/dynamic-loader.directive';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     RegisterComponent,
-    DashboardComponent,    
+    LoginComponent,
+    DashboardComponent,
+    // DynamicLoaderDirective,
   ],
   imports: [
     BrowserModule,
-    CommonModule,
-    HomeModule,
     AppRoutingModule,
-    ServiceModule,
+    HomeModule,
     SharedModule,
-    MatButtonModule,
+    BrowserAnimationsModule,
+    RouterModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]
