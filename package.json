@@ -5,6 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-api": "cd api && npm start",
-    "build-api": "cd api && npm install"
+    "build-api": "cd api && npm install",
+    "start-webapp": "cd webapp-v2 && npm run start",
+    "build-webapp": "cd webapp-v2 && npm install"
   }
 }
