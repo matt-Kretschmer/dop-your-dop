@@ -3,6 +3,7 @@ import { HeaderConfigModel } from '../models/shared.models';
 import { ProfileComponent } from './profile/profile.component';
 import { AlcoholicsComponent } from './alcoholics/alcoholics.component';
 import { Chart } from 'angular-highcharts';
+import { DrinksService } from '../services/drinks.service';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,16 @@ export class HomeComponent implements OnInit {
   chart!:Chart;
   headerIndex:number = 0;
 
+  constructor(
+    private drinksService: DrinksService
+  ){}
+
   ngOnInit(): void {
+    this.drinksService.getDrinks().then((drinks) => {
+      console.log(drinks)
+    }).catch((error) => {
+      console.log(error)
+    })
     this.chart = new Chart({
       chart: {
         type: 'line',
