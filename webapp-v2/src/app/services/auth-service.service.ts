@@ -17,7 +17,7 @@ export class AuthService {
       };
 
       // Send a POST request to the /user/register endpoint
-      return this.http.post<any>('http://localhost:8080/user/register', requestBody).toPromise();
+      return this.http.post<any>('https://ptjm55hxb2.eu-west-1.awsapprunner.com/user/register', requestBody).toPromise();
     } catch (error) {
       console.error('Error signing up:', error);
       throw error;
@@ -33,7 +33,7 @@ export class AuthService {
       };
 
       // Send a POST request to the /user/login endpoint
-      return this.http.post<any>('http://localhost:8080/user/login', requestBody).toPromise();
+      return this.http.post<any>('https://ptjm55hxb2.eu-west-1.awsapprunner.com/user/login', requestBody).toPromise();
     } catch (error) {
       console.error('Error signing in:', error);
       throw error;
