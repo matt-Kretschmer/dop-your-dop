@@ -49,6 +49,6 @@ export class DrinksService {
     if(!username){
       this.router.navigate(['/login']);
     }
-    return this.http.post<any>('https://ptjm55hxb2.eu-west-1.awsapprunner.com/usersDrinks', {username}).toPromise();
+    return this.http.post<any>('https://ptjm55hxb2.eu-west-1.awsapprunner.com/drink', {username}).toPromise();
   }
 }
