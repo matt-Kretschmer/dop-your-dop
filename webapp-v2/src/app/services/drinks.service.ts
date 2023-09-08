@@ -1,24 +1,34 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DrinksService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
-  async postDrink(username:string, drink:string, quantity:number){
+  async postDrink(drink:string, quantity:string){
+    const username = localStorage.getItem('username');
+
+    if(!username){
+      this.router.navigate(['/login']);
+    }
+  
     try {
       const time = new Date();
       const data = {
-        username: username,
+        username: localStorage.getItem('username'),
         drink: drink,
         quantity: quantity,
         time: time
        };
 
       // Send a POST request to the /user/register endpoint
-      return this.http.post<any>('http://localhost:8080/user/register', data).toPromise();
+      return this.http.post<any>('https://ptjm55hxb2.eu-west-1.awsapprunner.com/usersDrinks', data).toPromise();
     } catch (error) {
       console.error('Error signing up:', error);
       throw error;
@@ -26,11 +36,19 @@ export class DrinksService {
   }
 
   async getDrinks(){
-    return this.http.get<any>('http://localhost:8080/drinks').toPromise();
+    const username = localStorage.getItem('username');
+
+    if(!username){
+      this.router.navigate(['/login']);
+    }
+    return this.http.get<any>('https://ptjm55hxb2.eu-west-1.awsapprunner.com/drinks').toPromise();
   }
 
   async getUsersDrinks(){
     const username = localStorage.getItem('username');
-    return this.http.post<any>('http://localhost:8080/usersDrinks', {username}).toPromise();
+    if(!username){
+      this.router.navigate(['/login']);
+    }
+    return this.http.post<any>('https://ptjm55hxb2.eu-west-1.awsapprunner.com/usersDrinks', {username}).toPromise();
   }
 }
