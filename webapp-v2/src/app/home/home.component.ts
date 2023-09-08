@@ -75,7 +75,6 @@ export class HomeComponent implements OnInit {
   }
   async getData(){
     const drinks:DrinksData[] = await this.drinksService.getDrinks();
-    console.log(drinks);
 
     const categories = ['0', '1', '2', '3', '4', '5', '6',
     '7', '8', '9', '10', '11', '12', '13',
@@ -239,8 +238,7 @@ export class HomeComponent implements OnInit {
       if(this.myForm.valid){
         const drink = this.myForm.get('drink')?.value;
         const quantity = this.myForm.get('quantity')?.value
-        console.log(drink)
-        console.log(quantity)
+
         const numberParse = Number(quantity)
 
         await this.drinksService.postDrink(drink,quantity)
@@ -248,7 +246,6 @@ export class HomeComponent implements OnInit {
         this.closeDialog();
       }
     } catch (error) {
-      console.log(error)
     }
   }
 

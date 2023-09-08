@@ -14,7 +14,6 @@ export class TabGeneratorComponent {
   @Output() tabChanged = new EventEmitter();
 
   cheese(inp:MatTabChangeEvent){
-    console.log(inp)
     this.tabChanged.emit(inp.index)
   }
 }

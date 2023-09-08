@@ -56,7 +56,6 @@ export class AuthFormComponent implements OnInit {
       this.confirmPasswordError = '';
   
       // Form is valid, continue with form submission
-      console.log('Form submitted:', this.myForm.value);
       this.userConfirmed.emit(data);
     }
 

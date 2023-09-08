@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
       headerText: 'Login',
       buttonContent:'Register',
       action: () => {
-        console.log('clicked')
         this.router.navigate(['/register'])
       }
     }
@@ -29,11 +28,9 @@ export class LoginComponent implements OnInit {
 
   login(data:any){
     this.authService.login(data.username, data.password).then((res) => {
-      console.log(res)
       localStorage.setItem('username', res.username)
       this.router.navigate(['/home']);
     }).catch((error) => {
-      console.log(error)
     })
   }
 }

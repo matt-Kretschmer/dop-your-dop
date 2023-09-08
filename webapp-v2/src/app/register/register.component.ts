@@ -21,7 +21,6 @@ export class RegisterComponent {
       headerText: 'Register',
       buttonContent:'Login',
       action: () => {
-        console.log('clicked')
         this.router.navigate(['/login'])
       }
     }
@@ -29,11 +28,9 @@ export class RegisterComponent {
 
   async register(data:any){
     this.authService.register(data).then((response) => {
-      console.log(response)
       localStorage.setItem('username',response.username)
       this.router.navigate(['/home']);
     }).catch((error) => {
-      console.log(error)
     })
   }
 }
