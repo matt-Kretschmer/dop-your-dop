@@ -28,7 +28,7 @@ export class DrinksService {
        };
 
       // Send a POST request to the /user/register endpoint
-      return this.http.post<any>('https://ptjm55hxb2.eu-west-1.awsapprunner.com/usersDrinks', data).toPromise();
+      return this.http.post<any>('https://ptjm55hxb2.eu-west-1.awsapprunner.com/drink', data).toPromise();
     } catch (error) {
       console.error('Error signing up:', error);
       throw error;
